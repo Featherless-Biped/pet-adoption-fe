@@ -93,6 +93,8 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
+      console.log(loggedIn.token)
+
       navigate("/home");
     }
   };
@@ -237,10 +239,12 @@ const Form = () => {
           {/* BUTTONS */}
           <Box>
             <Button
-              fullWidth
+              
               type="submit"
               sx={{
-                m: "2rem 0",
+                justifyContent: "center",
+                width: "50%",
+                m: "2rem 25% 0 25%",
                 p: "1rem",
                 backgroundColor: palette.primary.main,
                 color: palette.background.alt,
@@ -269,6 +273,8 @@ const Form = () => {
                 : "Already have an account? Login here."}
             </Typography>
           </Box>
+
+          
         </form>
       )}
     </Formik>
