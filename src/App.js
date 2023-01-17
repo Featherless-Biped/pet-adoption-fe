@@ -1,27 +1,35 @@
-import {BrowserRouter, Navigate, Routes, Route} from 'react-router-dom'
-import Dashboard from './displays/adminPages/dashboardPage';
-import HomePage from './displays/homePage/homePage';
-import LoggedInHomePage from './displays/homePage/LoggedInHomePage';
-// import LoginPage from './displays/loginPage/loginPage';
-import MyPetsPage from './displays/myPetsPage/myPetsPage';
-
-
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import Dashboard from "./displays/adminPages/DashBoard";
+import Form from "./displays/adminPages/AddPetSegments/Form"
+import HomePage from "./displays/homePage/homePage";
+import LoggedInHomePage from "./displays/homePage/LoggedInHomePage";
+import SearchPage from "./displays/searchPage/SearchPage"
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { themeSettings } from "./theme";
 
 function App() {
+    const mode = useSelector((state) => state.mode);
+    const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+    const isAuth = Boolean(useSelector((state) => state.token));
 
-
-  return (
-    <div className="app">
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<LoggedInHomePage />} />
-        <Route path="/pets/:userid" element={<MyPetsPage />} />
-      </Routes>
-      </BrowserRouter>
-    
-    </div>
-  );
+    return (
+        <div className="app">
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/search" element={<SearchPage />} />
+                        <Route path="/home" element={isAuth ? <LoggedInHomePage /> : <Navigate to="/" />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
+                    </Routes>
+                </ThemeProvider>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

@@ -1,21 +1,22 @@
-import Modal from "@mui/material";
+// import Modal from "@mui/material";
 import {
     ManageAccountsOutlined,
     AdminPanelSettingsIcon,
     EditOutlined,
-    ContactPhoneIcon,
-    EmailIcon,
-    PetsIcon,
+
 } from "@mui/icons-material";
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import EmailIcon from '@mui/icons-material/Email';
+import PetsIcon from '@mui/icons-material/Pets';
 import { Box, Typography, Divider, useTheme } from "@mui/material";
-import UserImage from "components/UserImage";
-import FlexBetween from "components/FlexBetween";
-import WidgetWrapper from "components/WidgetWrapper";
+import ProfileImage from "../../../components/ProfileImage";
+import FlexBetween from "../../../components/FlexBetween";
+import WidgetWrapper from "../../../components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UserInfoModal = ({ userId, picturePath }) => {
+const UserInfoWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const UserInfoModal = ({ userId, picturePath }) => {
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
+    
 
     const getUser = async () => {
         const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -45,12 +47,12 @@ const UserInfoModal = ({ userId, picturePath }) => {
         user;
 
     return (
-        <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
+//         <Modal
+//   open={open}
+//   onClose={handleClose}
+//   aria-labelledby="modal-modal-title"
+//   aria-describedby="modal-modal-description"
+// ></Modal>
         <WidgetWrapper>
             {/* FIRST ROW */}
             <FlexBetween
@@ -59,7 +61,7 @@ const UserInfoModal = ({ userId, picturePath }) => {
                 onClick={() => navigate(`/profile/${userId}`)}
             >
                 <FlexBetween gap="1rem">
-                    <UserImage image={picturePath} />
+                    <ProfileImage image={picturePath} />
                     <Box>
                         <Typography
                             variant="h4"
@@ -72,10 +74,10 @@ const UserInfoModal = ({ userId, picturePath }) => {
                                 },
                             }}
                         >
-                            {firstName} {lastName}
+                           Welcome {firstName} {lastName}
                         </Typography>
-                        <Typography color={medium}>
-                            {ownedPets.length} <PetsIcon fontSize="large" sx={{ color: main }}/>
+                        <Typography color={medium} fontSize="2rem">
+                         {ownedPets.length} <PetsIcon fontSize="large" sx={{ color: main }}/>
                         </Typography>
                     </Box>
                 </FlexBetween>
@@ -150,8 +152,8 @@ const UserInfoModal = ({ userId, picturePath }) => {
                 </FlexBetween>
             </Box> */}
         </WidgetWrapper>
-        </Modal>
+        
     );
 };
 
-export default UserInfoModal;
+export default UserInfoWidget;

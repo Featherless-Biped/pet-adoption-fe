@@ -1,6 +1,5 @@
 import { Box, Button, useTheme, Modal } from "@mui/material";
 import { useState } from "react";
-
 import Form from "./Form";
 
 const LoginPage = () => {
@@ -44,7 +43,7 @@ const LoginPage = () => {
                     "&:hover": { color: palette.primary.main },
                 }}
             >
-                <Form />
+                <Form padding="2rem" backgroundColor="white"/>
             </Modal>
         </Box>
     );

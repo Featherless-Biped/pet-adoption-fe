@@ -22,7 +22,7 @@ export const authSlice = createSlice({
             state.user = null;
             state.tokens = null;
         },
-        setAdoptPet: (state, action) => {
+        setUserPets: (state, action) => {
             if (state.user) {
                 state.user.ownedPets = action.payload.ownedPets;
             } else {
@@ -34,7 +34,7 @@ export const authSlice = createSlice({
         },
         setPostPet: (state, action) => {
             const updatedPets = state.pets.map((pet) => {
-                if (pet._id == action.payload.post_id)
+                if (pet._id === action.payload.post_id)
                     return action.payload.pets;
                 return pet;
             });
@@ -47,7 +47,7 @@ export const {
     setMode,
     setLogin,
     setLogout,
-    setAdoptPet,
+    setUserPets,
     setPets,
     setPostPet,
 } = authSlice.actions;
