@@ -1,10 +1,6 @@
-// import PetsList from '../adminPages/DashBoardSegments/FetchPets.jsx';
 import { useSelector } from "react-redux";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 import UserInfoWidget from "../adminPages/DashBoardSegments/UserInfoWidget.jsx";
-import UserPetListWidget from "../../components/UserPetListWidget";
-import GetSpecificPets from "../../components/GetSpecificPet.jsx";
-import Pet from "../../components/Pet.jsx";
 import PetsList from "../adminPages/DashBoardSegments/PetsList.jsx";
 import { useNavigate } from "react-router-dom";
 

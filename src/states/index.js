@@ -22,6 +22,9 @@ export const authSlice = createSlice({
             state.user = null;
             state.tokens = null;
         },
+        setAllUsers: (state, action) => {
+            state.users = action.payload.users;
+        },
         setUserPets: (state, action) => {
             if (state.user) {
                 state.user.ownedPets = action.payload.ownedPets;
@@ -48,6 +51,7 @@ export const {
     setLogin,
     setLogout,
     setUserPets,
+    setAllUsers,
     setPets,
     setPostPet,
 } = authSlice.actions;

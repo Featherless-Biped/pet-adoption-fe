@@ -1,23 +1,38 @@
-import UsersList from "./DashBoardSegments/UsersList";
+import UsersList from "../../components/UserList"
 import PetsList from "./DashBoardSegments/PetsList";
-import Navbar from "../navbar/Navbar";
-// import UserInfoModal from "./DashBoardSegments/UserInfoModal";
-// import PetInfoModal from "./DashBoardSegments/PetInfoModal";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import GetFields from "../../components/GetFields";
+import { useEffect } from "react";
+import {  setAllUsers } from "../../states";
+
 
 const Dashboard = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:500px)");
-    const { _id, picturePath } = useSelector((state) => state.user);
+    const dispatch = useDispatch()
+    // const { _id, picturePath } = useSelector((state) => state.user);
     const pets = useSelector((state) => state.pets);
     const petIds = GetFields(pets, "_id")
-    console.log(petIds)
-    // console.log(petIds)
+    const token = useSelector((state) => state.token);
+
+    const GetAllUsers = async () => {
+        const response = await fetch(`http://localhost:3001/users`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        dispatch(setAllUsers({users: data})) ;
+    };
+    useEffect(() => {
+        GetAllUsers()
+        console.log(users);
+
+    }, []);
+    const users = useSelector((state) => state.users)
+
     return (
         <Box>
-            <Navbar />
 
             <Box
                 width="100%"
@@ -27,7 +42,7 @@ const Dashboard = () => {
                 justifyContent="space-between"
             >
                 <Box flexBasis={isNonMobileScreens ? "42%" : undefined}>
-                    {/* <UsersList /> */}
+                    <UsersList theUsers={users} />
                 </Box>
                 <Box
                     flexBasis={isNonMobileScreens ? "52%" : undefined}

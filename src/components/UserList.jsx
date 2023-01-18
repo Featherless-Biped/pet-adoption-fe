@@ -1,44 +1,42 @@
-import { useDispatch } from "react-redux";
+
 import { useSelector } from "react-redux";
-import Pet from "../../../components/Pet";
+import User from "./User";
 
-const UserList = ({ theUsers }) => {
+const UserList = ({theUsers}) => {
+    const token = useSelector((state) => state.token);
+
+ 
    
+    // const usersPets = thePets.map((thePets) =>
+    //     pets.find((pet) => pet._id === thePets)
+    // );
 
+   
     return (
         <>
-        
             {theUsers.map(
                 ({
                     _id,
-                    name,
-                    petName,
-                    type,
-                    breed,
-                    height,
-                    weight,
-                    color,
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber,
+                    admintrator,
+                    ownedPets,
                     shortBio,
-                    hypoalergenic,
-                    dietaryRestrictions,
                     picturePath,
-                    adoptionStatus,
                 }) => (
-                    <Pet
+                    <User
                         key={_id}
-                        petId={_id}
-                        name={name}
-                        petName={petName}
-                        type={type}
-                        color={color}
+                        userId={_id}
+                        firstName={firstName}
+                        lastName={lastName}
+                        email={email}
+                        phoneNumber={phoneNumber}
+                        admintrator={admintrator}
+                        ownedPets={ownedPets}
                         shortBio={shortBio}
-                        hypoalergenic={hypoalergenic}
-                        dietaryRestrictions={dietaryRestrictions}
-                        breed={breed}
-                        height={height}
-                    weight={weight}
                         picturePath={picturePath}
-                        adoptionStatus={adoptionStatus}
                     />
                 )
             )}

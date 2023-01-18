@@ -1,21 +1,15 @@
 import { Box } from "@mui/system";
-import { Button } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
 import FlexBetween from "./FlexBetween";
 import {
-    ChatBubbleOutlineOutlined,
     FavoriteBorderOutlined,
     FavoriteOutlined,
-    ShareOutlined,
 } from "@mui/icons-material";
-import { setAdoptedPet } from "../states";
-import UserPets from "./OwnedPets";
 import WidgetWrapper from "./WidgetWrapper";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPostPet } from "../states";
+import setPostPet from "../states/index"
 
 const PetCard = ({
      petID,
@@ -40,21 +34,22 @@ const PetCard = ({
     const main = "black";
     const primary = palette.primary.main;
 
-    // const patchAdopt = async () => {
-    //     const response = await fetch(
-    //         `http:localhost:3001/pets/${petID}/adoptionStatus`,
-    //         {
-    //             method: "PATCH",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             // body: JSON.stringify({ userID: loggedInUserId }),
-    //         }
-    //     );
-    //     const updatedPet = await response.json();
-    //     dispatch(setPostPet({ pet: updatedPet }));
-    // };
+    const patchAdopt = async () => {
+        const response = await fetch(
+            `http:localhost:3001/pets/${petID}/adoptionStatus`,
+            {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    adoptionStatus: true}),
+            }
+        );
+        const updatedPet = await response.json();
+        dispatch(setPostPet({ pet: updatedPet }));
+    };
 
     return (
         <WidgetWrapper m="2rem 0">
@@ -98,7 +93,7 @@ const PetCard = ({
                     </Typography>
                 </FlexBetween>
                 <FlexBetween >
-                    <IconButton onClick={console.log("hello")}>
+                    <IconButton onClick={patchAdopt}>
                         {adoptionStatus ? (
                             <FavoriteOutlined sx={{ color: primary }} />
                         ) : (

@@ -49,7 +49,7 @@ const pets = useSelector((state) => state.pets);
           <option value=""></option>
           <option value="Cooked Chicken">Cooked Chicken</option>
           <option value="cat">Cat</option>
-          <option value="bird">Bird</option>
+          <option value="dog">Dog</option>
         </select>
       </div>
       <div>
@@ -64,9 +64,8 @@ const pets = useSelector((state) => state.pets);
         <label>Adoption Status:</label>
         <select value={adoptionStatus} onChange={handleAdoptionStatusChange}>
           <option value=""></option>
-          <option value="available">Available</option>
-          <option value="pending">Pending</option>
-          <option value="adopted">Adopted</option>
+          <option value="true">Adopted</option>
+          <option value="false">Available</option>
         </select>
       </div>
       <div>

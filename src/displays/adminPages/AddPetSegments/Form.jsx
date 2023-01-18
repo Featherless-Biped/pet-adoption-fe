@@ -38,11 +38,20 @@ const initialValuesPetRegister = {
     hypoallergenic: false,
     dietaryRestriction: "",
 };
-
-const Form = () => {
+// const initialValuesToUpdatePet = {
+//     petName: {petName},
+//     type: {type},
+//     breed: {breed},
+//     picture: {picture},
+//     height: {height},
+//     weight: {weight},
+//     color: {color},
+//     shortBio: {shortBio},
+//     hypoallergenic: {hypoallergenic},
+//     dietaryRestriction: {dietaryRestriction},
+// };
+const Form = ({updatePet}) => {
     const { palette } = useTheme();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     const isNonMobile = useMediaQuery("(min-width:600px)");
 
     const registerPet = async (values, onSubmitProps) => {

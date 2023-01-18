@@ -10,7 +10,7 @@ const HomePage = () => {
     const pets = useSelector((state) => state.pets);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const { palette } = useTheme(); 
-    
+    const token = useSelector((state) => state.token);
     
         const getAllPets = async () => {
             const response = await fetch("http://localhost:3001/pets", {
@@ -22,7 +22,6 @@ const HomePage = () => {
         };
         useEffect(() => {
             getAllPets();
-            console.log(pets);
         }, []);
 
     return (
