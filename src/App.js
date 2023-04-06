@@ -3,13 +3,12 @@ import Dashboard from "./displays/adminPages/DashBoard";
 import Form from "./displays/adminPages/AddPetSegments/Form"
 import HomePage from "./displays/homePage/homePage";
 import LoggedInHomePage from "./displays/homePage/LoggedInHomePage";
-import SearchPage from "./displays/searchPage/SearchPage"
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
-import Navbar from "./displays/navbar/Navbar";
+import Navbar from "./displays/navbar/navbar";
 
 function App() {
     const mode = useSelector((state) => state.mode);
@@ -26,7 +25,7 @@ function App() {
 
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/search" element={<SearchPage />} />
+                        {/* <Route path="/search" element={<SearchPage />} /> */}
                         <Route path="/home" element={isAuth ? <LoggedInHomePage /> : <Navigate to="/" />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                     </Routes>
